@@ -42,10 +42,10 @@ jobs:
             8.0.x
             9.0.x
             10.0.x
-      # build and pack nuget (.nupkg and .symbols.nupkg will be created)
+      # build and pack nuget (can't pack with symbol options like `-p:IncludeSymbols=true`)
       - run: dotnet build -c Release -p:Version=${{ inputs.tag }}
       - run: dotnet test -c Release --no-build
-      - run: dotnet pack -c Release -p:Version=${{ inputs.tag }} -p:IncludeSymbols=true -o ./publish
+      - run: dotnet pack -c Release -p:Version=${{ inputs.tag }} -o ./publish
       # Store artifacts.
       - uses: Cysharp/Actions/.github/actions/upload-artifact@main
         with:
